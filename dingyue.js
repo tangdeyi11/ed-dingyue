@@ -36,7 +36,7 @@ let RproxyIP = 'false';
 let proxyIPs = [
   'proxy.dtcs520.filegear-sg.me',
 ];
-let CMproxyIPs = [
+let DYPROXYIPS = [
   //'proxyip.aliyun.fxxk.dedyn.io:HK',
 ];
 let socks5DataURL = ''; // 'https://raw.githubusercontent.com/cmliu/WorkerVless2sub/main/socks5Data'
@@ -229,8 +229,8 @@ export default {
 		subconfig = env.SUBCONFIG || subconfig;
 		FileName = env.SUBNAME || FileName;
 		socks5DataURL = env.SOCKS5DATA || socks5DataURL;
-		if (env.CMPROXYIPS) CMproxyIPs = await ADD(env.CMPROXYIPS);;
-		//console.log(CMproxyIPs);
+		if (env.DYPROXYIPS) DYPROXYIPS = await ADD(env.DYPROXYIPS);;
+		//console.log(DYPROXYIPS);
 		EndPS = env.PS || EndPS;
 		const userAgentHeader = request.headers.get('User-Agent');
 		const userAgent = userAgentHeader ? userAgentHeader.toLowerCase() : "null";
@@ -528,8 +528,8 @@ export default {
 							const socks5 = getRandomProxyByMatch(lowerAddressid, socks5Data);
 							path = `/?${socks5}`;
 						} else {
-							// 遍历CMproxyIPs数组查找匹配项
-							for (let item of CMproxyIPs) {
+							// 遍历DYPROXYIPS数组查找匹配项
+							for (let item of DYPROXYIPS) {
 								if (lowerAddressid.includes(item.split(':')[1].toLowerCase())) {
 									foundProxyIP = item.split(':')[0];
 									break; // 找到匹配项，跳出循环
@@ -613,8 +613,8 @@ export default {
 						const socks5 = getRandomProxyByMatch(lowerAddressid, socks5Data);
 						path = `/?${socks5}`;
 					} else {
-						// 遍历CMproxyIPs数组查找匹配项
-						for (let item of CMproxyIPs) {
+						// 遍历DYPROXYIPS数组查找匹配项
+						for (let item of DYPROXYIPS) {
 							if (lowerAddressid.includes(item.split(':')[1].toLowerCase())) {
 								foundProxyIP = item.split(':')[0];
 								break; // 找到匹配项，跳出循环
