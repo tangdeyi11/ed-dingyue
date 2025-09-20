@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'works-source.js'
+      - 'dingyue.js'
   workflow_dispatch:
 
 jobs:
@@ -31,13 +31,13 @@ jobs:
         run: npm install -g javascript-obfuscator
 
       # 4. 混淆 JS
-      - name: Obfuscate works-source.js
+      - name: Obfuscate dingyue.js
         run: |
           PREFIX="var_$(date +%s%N | sha256sum | head -c 6)"
           echo "Using prefix: $PREFIX"
 
-          javascript-obfuscator works-source.js \
-            --output works-source_obfuscated.js \
+          javascript-obfuscator dingyue.js \
+            --output dingyue-obfuscator.js \
             --compact true \
             --control-flow-flattening false \
             --dead-code-injection false \
