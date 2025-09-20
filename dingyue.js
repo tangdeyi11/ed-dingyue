@@ -31,8 +31,8 @@ let subconverter = "subapi.dtcs520.ggff.net"; // 订阅转换后端
 let subconfig = "https://raw.githubusercontent.com/tangdeyi11/dyconfig/main/rule.ini"; // 订阅转换配置文件
 let noTLS = 'false'; // 改为 true , 将不做域名判断 始终返回noTLS节点
 let link = '';
-let edgetunnel = 'cmliu';        //必须用cmliu，否则订阅出来的path是/?ed=2560
-let RproxyIP = 'true';           //必须用true，否则订阅出来的path是/?ed=2560
+let edgetunnel = 'cmliu';         //必须用cmliu，否则订阅出来的path是/?ed=2560
+let RproxyIP = 'true';            //必须用true，否则订阅出来的path是/?ed=2560
 let proxyIPs = [
   'proxy.dtcs520.filegear-sg.me',
 ];
