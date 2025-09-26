@@ -400,8 +400,8 @@ export default {
 		
 		// let subconverterUrl = generateFakeInfo(url.href, uuid, host);
 		// 以上原逻辑存在订阅链接泄露，修改如下
-		let urls = `https://${suburl}/sub?host=${host}&uuid=${uuid}&edgetunnel=cmliu&proxyip`;   //通过将该url传给订阅转换服务器的方式，防止订阅链接泄露
-		let subconverterUrl = generateFakeInfo(urls, uuid, host);                                //通过将上面url里的原始host和uuid加密转换为fake内容的方式，防止订阅链接泄露
+		let tempurl = `https://${suburl}/sub?host=${host}&uuid=${uuid}&edgetunnel=cmliu&proxyip`;   //通过将该url传给订阅转换服务器的方式，防止订阅链接泄露
+		let subconverterUrl = generateFakeInfo(tempurl, uuid, host);                                //通过将上面url里的原始host和uuid加密转换为fake内容的方式，防止订阅链接泄露
 
 		if (!userAgent.includes('subconverter') && MamaJustKilledAMan.some(PutAGunAgainstHisHeadPulledMyTriggerNowHesDead => userAgent.includes(PutAGunAgainstHisHeadPulledMyTriggerNowHesDead)) && MamaJustKilledAMan.length > 0) {
 			const envKey = env.URL302 ? 'URL302' : (env.URL ? 'URL' : null);
