@@ -28,6 +28,7 @@ let addressescsv = [
 ];
 
 let subconverter = "subapi.dtcs.dpdns.org";  // 订阅转换后端
+let suburl = "dy.dtcs520.com"                //原始代码subconverterUrl的定义错误，在订阅转换期间传输了完整的订阅链接地址，泄露信息，修改subconverterUrl的获取逻辑，需要增加该变量
 let subconfig = "https://raw.githubusercontent.com/tangdeyi11/dyconfig/main/rule.ini"; // 订阅转换配置文件
 let noTLS = 'false'; // 改为 true , 将不做域名判断 始终返回noTLS节点
 let link = '';
@@ -396,7 +397,11 @@ export default {
 		
 		if (host.toLowerCase().includes('notls') || host.toLowerCase().includes('worker') || host.toLowerCase().includes('trycloudflare')) noTLS = 'true';
 		noTLS = env.NOTLS || noTLS;
-		let subconverterUrl = generateFakeInfo(url.href, uuid, host);
+		
+		// let subconverterUrl = generateFakeInfo(url.href, uuid, host);
+		// 以上原逻辑存在订阅链接泄露，修改如下
+		let url = `https://${suburl}/sub?host=${host}&uuid=${uuid}&edgetunnel=cmliu&proxyip`;   //通过将该url传给订阅转换服务器的方式，防止订阅链接泄露
+		let subconverterUrl = generateFakeInfo(url, uuid, host);                                //通过将上面url里的原始host和uuid加密转换为fake内容的方式，防止订阅链接泄露
 
 		if (!userAgent.includes('subconverter') && MamaJustKilledAMan.some(PutAGunAgainstHisHeadPulledMyTriggerNowHesDead => userAgent.includes(PutAGunAgainstHisHeadPulledMyTriggerNowHesDead)) && MamaJustKilledAMan.length > 0) {
 			const envKey = env.URL302 ? 'URL302' : (env.URL ? 'URL' : null);
