@@ -813,11 +813,11 @@ async function MD5MD5(text) {
 
 // 替换掉伪造的用户ID和主机名，恢复成真实的内容
 function revertFakeInfo(content, userID, hostName) {
-    content = content.replace(new RegExp(fakeUserID, 'g'), userID) // 替换伪造的用户ID
-                     .replace(new RegExp(fakeHostName, 'g'), hostName) // 替换伪造的主机名
-	                 .replace('tls://1.1.1.1', 'tls://8.8.8.8') // 将 tls://1.1.1.1 修改为 tls://8.8.8.8  订阅转无法修改dns配置
-                     .replace('"query_type":["A","AAAA"]', '"query_type":["A"]'); // 将 query_type: ["A", "AAAA"] 修改为 query_type: ["A"]  订阅转无法修改dns配置
-	                 .replace('{"type":"direct","tag":"DIRECT"},', '{"type":"direct","tag":"DIRECT"},{"type":"block","tag":"REJECT"},'); // 订阅转换没添加REJECT的block接口，导致singbox的reject规则报错
+    content = content.replace(new RegExp(fakeUserID, 'g'), userID)                 // 替换伪造的用户ID
+                     .replace(new RegExp(fakeHostName, 'g'), hostName)             // 替换伪造的主机名
+	                 .replace('tls://1.1.1.1', 'tls://8.8.8.8')                    // 将 tls://1.1.1.1 修改为 tls://8.8.8.8  订阅转无法修改dns配置
+                     .replace('"query_type":["A","AAAA"]', '"query_type":["A"]')   // 将 query_type: ["A", "AAAA"] 修改为 query_type: ["A"]  订阅转无法修改dns配置
+	                 .replace('{"type":"direct","tag":"DIRECT"},', '{"type":"direct","tag":"DIRECT"},{"type":"block","tag":"REJECT"},');    // 订阅转换没添加REJECT的block接口，导致singbox的reject规则报错
     return content;
 }
 
