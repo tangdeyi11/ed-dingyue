@@ -27,7 +27,7 @@ let addressescsv = [
   //'https://raw.githubusercontent.com/cmliu/WorkerVless2sub/main/addressescsv.csv', // iptest测速结果文件。
 ];
 
-let subconverter = "subapi.cmliussss.net";  // 订阅转换后端  subapi.dtcs.dpdns.org
+let subconverter = "subapi.dtcs.dpdns.org";  // 订阅转换后端  subapi.dtcs.dpdns.org
 let suburl = "dy.dtcs520.com"                //原始代码subconverterUrl的定义错误，在订阅转换期间传输了完整的订阅链接地址，泄露信息，修改subconverterUrl的获取逻辑，需要增加该变量
 let subconfig = "https://raw.githubusercontent.com/tangdeyi11/dyconfig/main/rule.ini"; // 订阅转换配置文件
 let noTLS = 'false'; // 改为 true , 将不做域名判断 始终返回noTLS节点
@@ -814,10 +814,10 @@ async function MD5MD5(text) {
 // 替换掉伪造的用户ID和主机名，恢复成真实的内容
 function revertFakeInfo(content, userID, hostName) {
     content = content.replace(new RegExp(fakeUserID, 'g'), userID)                 // 替换伪造的用户ID
-                     .replace(new RegExp(fakeHostName, 'g'), hostName);             // 替换伪造的主机名
-	                // .replace('tls://1.1.1.1', 'tls://8.8.8.8')                    // 将 tls://1.1.1.1 修改为 tls://8.8.8.8  订阅转无法修改dns配置
-                   //  .replace('"query_type":["A","AAAA"]', '"query_type":["A"]')   // 将 query_type: ["A", "AAAA"] 修改为 query_type: ["A"]  订阅转无法修改dns配置
-	                // .replace('{"type":"direct","tag":"DIRECT"},', '{"type":"direct","tag":"DIRECT"},{"type":"block","tag":"REJECT"},');    // 订阅转换没添加REJECT的block接口，导致singbox的reject规则报错
+                     .replace(new RegExp(fakeHostName, 'g'), hostName)             // 替换伪造的主机名
+	                 .replace('tls://1.1.1.1', 'tls://8.8.8.8')                    // 将 tls://1.1.1.1 修改为 tls://8.8.8.8  订阅转无法修改dns配置
+                     .replace('"query_type":["A","AAAA"]', '"query_type":["A"]')   // 将 query_type: ["A", "AAAA"] 修改为 query_type: ["A"]  订阅转无法修改dns配置
+	                 .replace('{"type":"direct","tag":"DIRECT"},', '{"type":"direct","tag":"DIRECT"},{"type":"block","tag":"REJECT"},');    // 订阅转换没添加REJECT的block接口，导致singbox的reject规则报错
     return content;
 }
 
