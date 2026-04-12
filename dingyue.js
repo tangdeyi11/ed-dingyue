@@ -816,8 +816,9 @@ function revertFakeInfo(content, userID, hostName) {
     content = content.replace(new RegExp(fakeUserID, 'g'), userID)                 // 替换伪造的用户ID
                      .replace(new RegExp(fakeHostName, 'g'), hostName)             // 替换伪造的主机名
 	                 .replace('tls://1.1.1.1', 'tls://8.8.8.8')                    // 将 tls://1.1.1.1 修改为 tls://8.8.8.8  订阅转无法修改dns配置
-                     .replace('"query_type":["A","AAAA"]', '"query_type":["A"]')   // 将 query_type: ["A", "AAAA"] 修改为 query_type: ["A"]  订阅转无法修改dns配置
-	                 .replace('{"type":"direct","tag":"DIRECT"},', '{"type":"direct","tag":"DIRECT"},{"type":"block","tag":"REJECT"},');    // 订阅转换没添加REJECT的block接口，导致singbox的reject规则报错
+                     .replace('"inet4_range":"198.18.0.0/15"', '"inet4_range":"198.18.0.0/15","inet6_range": "fc00::/18"')   // 也可以将 query_type: ["A", "AAAA"] 修改为 query_type: ["A"]  订阅转无法修改dns配置
+	                 .replace('{"type":"direct","tag":"DIRECT"},', '{"type":"direct","tag":"DIRECT"},{"type":"dns","tag": "dns-out"},{"type":"block","tag":"REJECT"},')    // 订阅转换没添加REJECT的block接口，导致singbox的reject规则报错
+	                 .replace('{"clash_mode":"Global","outbound":"GLOBAL"},', '{"protocol":"dns","outbound": "dns-out"},{"clash_mode":"Global","outbound":"GLOBAL"},');    // 把上面tag：dns-out的dns解析流量在"route":{"rules":部分允许出向，否则DNS解析失败，导致后续所有outbound无法出局
     return content;
 }
 
